@@ -1,4 +1,4 @@
-const { getHealthSummary } = require("./index");
+import { getHealthSummary } from "./index.js";
 
 describe("Health summary", () => {
   test("should return healthy summary for a single day", async () => {

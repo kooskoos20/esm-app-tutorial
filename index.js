@@ -1,6 +1,6 @@
-const { getDailySteps } = require("./stepsTracker");
+import { getDailySteps } from "./stepsTracker.js";
 
-const getHealthSummary = (numberOfDays) => {
+export const getHealthSummary = (numberOfDays) => {
   const dailySteps = getDailySteps(numberOfDays);
   const totalSteps = dailySteps.reduce(
     (steps, totalSteps) => totalSteps + steps,
@@ -11,5 +11,3 @@ const getHealthSummary = (numberOfDays) => {
     totalSteps,
   };
 };
-
-module.exports = { getHealthSummary };
