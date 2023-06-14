@@ -1,4 +1,3 @@
-import { getHealthSummary } from ".";
 import { jest } from "@jest/globals";
 
 const mockDailySteps = [
@@ -8,7 +7,7 @@ const mockGetDailySteps = jest.fn();
 
 describe("Health summary", () => {
   beforeAll(() => {
-    jest.mock("./stepsTracker", () => ({
+    jest.unstable_mockModule("./stepsTracker", () => ({
       getDailySteps: mockGetDailySteps.mockImplementation((numberOfDays) =>
         mockDailySteps.slice(0, numberOfDays)
       ),
@@ -16,7 +15,8 @@ describe("Health summary", () => {
   });
 
   afterAll(jest.clearAllMocks);
-  test("should return healthy summary for a single day", () => {
+  test("should return healthy summary for a single day", async () => {
+    const { getHealthSummary } = await import(".");
     const result = getHealthSummary(1);
     expect(result).toMatchObject({ numberOfDays: 1, totalSteps: 6_453 });
   });
